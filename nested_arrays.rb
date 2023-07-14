@@ -35,7 +35,7 @@ vehicles = {
 
 puts vehicles[:alice][:year]
 # Return the name of the owners that have cars newer than 2020
-new_vehicles = vehicles.map { |name, data| name if data[:year] >= 2020}  
+new_vehicles = vehicles.select { |name, data| name if data[:year] >= 2020}  
 puts new_vehicles
 # Return the names of the owers without nil
 new_vehicles_no_nil = vehicles.collect { |name, data| name if data[:year] >= 2020}.compact
