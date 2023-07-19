@@ -1,4 +1,6 @@
-require_relative "Player.rb"
+require_relative "player.rb"
+require_relative "board.rb"
+
 # make tic tac toe
 # use the command line
 # make two players
@@ -7,3 +9,6 @@ require_relative "Player.rb"
 
 player1 = Player.new("Mike", "O")
 puts player1
+
+game_board = Board.new()
+print game_board
