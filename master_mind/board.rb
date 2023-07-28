@@ -8,7 +8,7 @@ class Board
         @password
     end
 
-    def make_password ()
+    def make_password()
         password = ""
         4.times do 
             n = 1 + Random.rand(6) # get random number from 1 to 6
