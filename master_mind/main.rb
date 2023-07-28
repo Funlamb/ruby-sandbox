@@ -9,4 +9,8 @@ require_relative "board.rb"
 # Make Board
 board = Board.new()
 puts board.get_password
+
+guess = gets.chomp
+puts ""
+print board.give_feedback(guess).to_s
 # Get the password
