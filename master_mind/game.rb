@@ -7,25 +7,22 @@ class Game
     end
 
     def start ()
-        turns = 12
-        while turns > 0
+        12.downto(0) do |turns|
             guess = get_valid_guess()
-            turns -= 1
+            # turns -= 1
             puts turns
+            puts @board.give_feedback(guess)
         end
     end
 
     def get_valid_guess ()
-        valid_guess = false
-        while !valid_guess
+        loop do
             guess = gets.chomp
-            if (guess =~ /[1-6]/ && guess.length == 4)
+            if guess.match? /\A[1-6]{4}\z/
                 puts "Valid Guess"
-                valid_guess = true
                 return guess
-            else 
-                puts "Invalid guess. Please enter 4 numbers from 1 to 6."
             end
+            puts "Invalid guess. Please enter 4 numbers from 1 to 6."
         end
     end
 end
