@@ -1,6 +1,9 @@
 require_relative "board.rb"
+require_relative "formating.rb"
 
 class Game
+    include Formating
+
     def initialize
         @board = Board.new()
         # puts @board.get_password
@@ -9,6 +12,7 @@ class Game
     def start ()
         11.downto(0) do |turns|
             guess = get_valid_guess()
+            show_code(guess.chars)
             puts turns.to_s + " guesses left"
             if @board.check_if_correct(guess)
                 return true
