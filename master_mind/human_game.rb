@@ -1,7 +1,7 @@
 require_relative "board.rb"
 require_relative "formating.rb"
 
-class Game
+class HumanGame
     include Formating
 
     def initialize
@@ -9,7 +9,7 @@ class Game
         # puts @board.get_password
     end
 
-    def start ()
+    def start
         11.downto(0) do |turns|
             guess = get_valid_guess()
             show_code(guess.chars)
@@ -27,7 +27,7 @@ class Game
         puts @board.get_password
     end
 
-    def get_valid_guess ()
+    def get_valid_guess
         loop do
             guess = gets.chomp
             if guess.match? /\A[1-6]{4}\z/
