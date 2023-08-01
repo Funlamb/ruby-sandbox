@@ -1,15 +1,17 @@
 module Instructions
     def instructions
         <<~HEREDOC
+            Hello, #{@player_name}.
             This is how you play Mastermind.
 
             It is a 1 player game against the computer.
-            You can choose to make the code for the computer to break or break the computers code.
+            You can choose to make the code or to break the computer's code.
+            The code breaker will have 12 guesses to crack the code. 
 
-            There are 6 different number/color combonations:
+            There are 6 different number/color combinations:
             #{code_colors('1')}#{code_colors('2')}#{code_colors('3')}#{code_colors('4')}#{code_colors('5')}#{code_colors('6')}
 
-            The code will consist of 4 number/color combonations. Example:
+            The code will consist of 4 number/color combinations. Example:
             #{code_colors('3')}#{code_colors('2')}#{code_colors('5')}#{code_colors('6')}
 
             You can use any number more than once. 

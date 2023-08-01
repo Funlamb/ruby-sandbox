@@ -16,6 +16,7 @@ class Board
 
     def give_feedback(str_guess)
         # get correct guess color and spots
+        @password = 2443.to_s
         password = @password.chars
         str_guess = str_guess.chars
         correct_spot_and_color = 0
@@ -35,16 +36,15 @@ class Board
         
         # get correct color but wrong spots 
         correct_color = 0
-        str_guess.each do |tg_elm|
+        str_guess.each_with_index do |tg_elm, index_tg| #3224 code 2443
             password.each_with_index do |pw_elm, index|
-                if pw_elm == tg_elm
+                if pw_elm == str_guess[index_tg] && pw_elm != ""
                     correct_color += 1
                     password[index] = ""
+                    str_guess[index_tg] = ""
                 end
             end
         end
-        # maybe return the correct_spot_and_color and correct_color as an array to have main display text
-        "You guessed #{correct_spot_and_color} in the correct spot and #{correct_color} correct colors in the wrong spot"
         [correct_spot_and_color, correct_color]
     end
 end
