@@ -9,14 +9,13 @@ class Board
     def get_password 
         @password
     end
-
+    # TODO get way to set password for code maker
     def check_if_correct(str_guess)
         @password == str_guess
     end
 
     def give_feedback(str_guess)
         # get correct guess color and spots
-        @password = 2443.to_s
         password = @password.chars
         str_guess = str_guess.chars
         correct_spot_and_color = 0
