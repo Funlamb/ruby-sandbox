@@ -1,6 +1,6 @@
 require_relative "board.rb"
 class ComputerGame
-    # TODO Setup start game
+    # TODO Refactor
     def start ()
         user_given_password = get_valid_guess
         @board = Board.new
@@ -9,6 +9,7 @@ class ComputerGame
         @guesses = make_all_guesses
         computer_guess = 1122.to_s
         clue = make_first_guess(computer_guess)
+        # TODO Give user feed back about computer's moves
         1.upto(12) do |i| 
             prune_bad_guesses(clue, computer_guess)
             computer_guess = @guesses[rand(@guesses.length)]
@@ -23,6 +24,7 @@ class ComputerGame
         @board.give_feedback(guess)
     end
 
+    # TODO Refactor
     def prune_bad_guesses (clues, last_guess)
         guesses_to_delete = []
         local_guesses = @guesses
@@ -81,6 +83,7 @@ class ComputerGame
         guesses
     end
     
+    # TODO Refactor Maybe move to board class
     def get_valid_guess
         loop do
             guess = gets.chomp

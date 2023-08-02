@@ -27,6 +27,7 @@ class HumanGame
         puts @board.get_password
     end
 
+    # TODO Refactor maybe move to board class
     def get_valid_guess
         loop do
             guess = gets.chomp
