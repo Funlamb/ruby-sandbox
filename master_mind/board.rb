@@ -9,7 +9,11 @@ class Board
     def get_password 
         @password
     end
-    # TODO get way to set password for code maker
+
+    def set_password (str)
+        @password = str.to_s
+    end
+
     def check_if_correct(str_guess)
         @password == str_guess
     end
