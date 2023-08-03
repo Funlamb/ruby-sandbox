@@ -11,7 +11,7 @@ class HumanGame
 
     def start
         11.downto(0) do |turns|
-            guess = get_valid_guess()
+            guess = @board.get_valid_guess
             show_code(guess.chars)
             if @board.check_if_correct(guess)
                 return true
@@ -25,16 +25,5 @@ class HumanGame
 
         end
         puts @board.get_password
-    end
-
-    # TODO Refactor maybe move to board class
-    def get_valid_guess
-        loop do
-            guess = gets.chomp
-            if guess.match? /\A[1-6]{4}\z/
-                return guess
-            end
-            puts "Invalid guess. Please enter 4 numbers from 1 to 6."
-        end
     end
 end

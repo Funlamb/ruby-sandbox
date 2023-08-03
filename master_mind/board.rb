@@ -50,4 +50,14 @@ class Board
         end
         [correct_spot_and_color, correct_color]
     end
+
+    def get_valid_guess
+        loop do
+            guess = gets.chomp
+            if guess.match? /\A[1-6]{4}\z/
+                return guess
+            end
+            puts "Invalid guess. Please enter 4 numbers from 1 to 6."
+        end
+    end
 end

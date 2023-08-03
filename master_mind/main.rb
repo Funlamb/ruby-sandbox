@@ -28,7 +28,7 @@ class Main
 
     def code_maker
         game = ComputerGame.new
-        game.start
+        puts game.start
     end
 
     def code_breaker

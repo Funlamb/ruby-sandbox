@@ -2,8 +2,8 @@ require_relative "board.rb"
 class ComputerGame
     # TODO Refactor
     def start ()
-        user_given_password = get_valid_guess
         @board = Board.new
+        user_given_password = @board.get_valid_guess
         @board.set_password(user_given_password)
         
         @guesses = make_all_guesses
@@ -24,12 +24,11 @@ class ComputerGame
         @board.give_feedback(guess)
     end
 
-    # TODO Refactor
-    def prune_bad_guesses (clues, last_guess)
+    def prune_bad_guesses (clue, last_guess)
         guesses_to_delete = []
         local_guesses = @guesses
         local_guesses.each_with_index do |elm, index|
-            if give_feedback(elm.to_s, last_guess.to_s) != clues
+            if give_feedback(elm.to_s, last_guess.to_s) != clue
                 guesses_to_delete.push(elm.to_s)
             end
         end
@@ -83,14 +82,14 @@ class ComputerGame
         guesses
     end
     
-    # TODO Refactor Maybe move to board class
-    def get_valid_guess
-        loop do
-            guess = gets.chomp
-            if guess.match? /\A[1-6]{4}\z/
-                return guess
-            end
-            puts "Invalid guess. Please enter 4 numbers from 1 to 6."
-        end
-    end
+    # # TODO Refactor Maybe move to board class
+    # def get_valid_guess
+    #     loop do
+    #         guess = gets.chomp
+    #         if guess.match? /\A[1-6]{4}\z/
+    #             return guess
+    #         end
+    #         puts "Invalid guess. Please enter 4 numbers from 1 to 6."
+    #     end
+    # end
 end
