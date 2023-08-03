@@ -29,7 +29,7 @@ module Formating
         same_color.times {print clue_markers('-')}
         puts ''
     end
-    # TODO Add formatting for computer and human player
+
     def display_human_feedback(guess, clues, turns)
         show_code(guess)
         show_clues(clues[0], clues[1])
@@ -52,5 +52,20 @@ module Formating
         show_code(password.chars)
     end
 
-    # TODO show user nice interface.
+    def display_computer_feedback(guess, clues, turns)
+        show_code(guess)
+        show_clues(clues[0], clues[1])
+        if turns == 1
+            puts "This is the computers last turn. Hope they fail."
+        else
+            puts "Computer has #{turns} turns left."
+        end
+    end
+
+    def display_computer_victory(guess, turns)
+        print "The computer figured out your code of "
+        show_code(guess)
+        turns = 12 - turns
+        print " in #{turns} turns."
+    end
 end

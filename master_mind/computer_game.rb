@@ -1,27 +1,29 @@
 require_relative "board.rb"
+require_relative "formating.rb"
+
 class ComputerGame
-    # TODO Refactor
+    include Formating
+
     def start ()
         @board = Board.new
         user_given_password = @board.get_valid_guess
         @board.set_password(user_given_password)
-        
+        puts "Thank you for the code. The computer will now try to guess your code."
         @guesses = make_all_guesses
         computer_guess = 1122.to_s
-        clue = make_first_guess(computer_guess)
-        # TODO Give user feed back about computer's moves
-        1.upto(12) do |i| 
+        clue = @board.give_feedback(computer_guess)
+        display_computer_feedback(computer_guess.chars, clue, 11)
+        10.downto(1) do |turn| 
             prune_bad_guesses(clue, computer_guess)
             computer_guess = @guesses[rand(@guesses.length)]
             if @board.check_if_correct(computer_guess)
-                return i
+                display_computer_victory(computer_guess.chars, turn)
+                return true
             end
             clue = @board.give_feedback(computer_guess)
-        end
-    end
+        display_computer_feedback(computer_guess.chars, clue, turn)
 
-    def make_first_guess(guess)
-        @board.give_feedback(guess)
+        end
     end
 
     def prune_bad_guesses (clue, last_guess)
@@ -41,10 +43,10 @@ class ComputerGame
         str_prune = str_prune.chars
         correct_spot_and_color = 0
         correct_spot_index = [] # used for checking correct colors later
-        last_guess.zip(str_prune).each_with_index do |(pw_element, str_elm), i|
+        last_guess.zip(str_prune).each_with_index do |(pw_element, str_elm), turn|
             if pw_element == str_elm
                 correct_spot_and_color += 1
-                correct_spot_index.push(i)
+                correct_spot_index.push(turn)
             end
         end
         
@@ -70,26 +72,15 @@ class ComputerGame
 
     def make_all_guesses
         guesses = []
-        (1..6).each do |i|
+        (1..6).each do |turn|
             (1..6).each do |j|
                 (1..6).each do |k|
                     (1..6).each do |l|
-                        guesses.push (i.to_s + j.to_s + k.to_s + l.to_s)
+                        guesses.push (turn.to_s + j.to_s + k.to_s + l.to_s)
                     end
                 end
             end
         end
         guesses
     end
-    
-    # # TODO Refactor Maybe move to board class
-    # def get_valid_guess
-    #     loop do
-    #         guess = gets.chomp
-    #         if guess.match? /\A[1-6]{4}\z/
-    #             return guess
-    #         end
-    #         puts "Invalid guess. Please enter 4 numbers from 1 to 6."
-    #     end
-    # end
 end
