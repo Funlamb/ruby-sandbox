@@ -12,18 +12,15 @@ class HumanGame
     def start
         11.downto(0) do |turns|
             guess = @board.get_valid_guess
-            show_code(guess.chars)
             if @board.check_if_correct(guess)
+                display_human_victory(guess.chars, turns)
                 return true
             end
             clues = @board.give_feedback(guess)
             correct_spot_and_color = clues[0]
             correct_color = clues[1]
-            show_clues(correct_spot_and_color, correct_color)
-
-            puts turns.to_s + " guesses left"
-
+            display_human_feedback(guess.chars, clues, turns)
         end
-        puts @board.get_password
+        display_human_loss (@board.get_password)
     end
 end

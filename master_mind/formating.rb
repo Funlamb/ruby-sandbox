@@ -29,4 +29,28 @@ module Formating
         same_color.times {print clue_markers('-')}
         puts ''
     end
+    # TODO Add formatting for computer and human player
+    def display_human_feedback(guess, clues, turns)
+        show_code(guess)
+        show_clues(clues[0], clues[1])
+        if turns > 1
+            puts "You have #{turns} turns left."
+        elsif turns == 1
+            puts "This is your last turn. Think carefully."
+        end
+    end
+
+    def display_human_victory(guess, turns)
+        show_code(guess)
+        puts " is the correct code."
+        turns = 12 - turns
+        puts "You cracked the code in #{turns} turns."
+    end
+
+    def display_human_loss (password)
+        puts "Sorry the correct code was: "
+        show_code(password.chars)
+    end
+
+    # TODO show user nice interface.
 end
