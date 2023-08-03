@@ -6,7 +6,6 @@ class HumanGame
 
     def initialize
         @board = Board.new()
-        # puts @board.get_password
     end
 
     def start

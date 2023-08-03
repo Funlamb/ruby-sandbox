@@ -1,11 +1,14 @@
 require_relative "board.rb"
 require_relative "formating.rb"
+require_relative "instructions.rb"
 
 class ComputerGame
     include Formating
-
+    include Instructions
+    
     def start ()
         @board = Board.new
+        puts ask_user_for_code
         user_given_password = @board.get_valid_guess
         @board.set_password(user_given_password)
         puts "Thank you for the code. The computer will now try to guess your code."

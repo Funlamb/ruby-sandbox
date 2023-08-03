@@ -21,11 +21,29 @@ module Instructions
             #{code_colors('1')}#{code_colors('2')}#{code_colors('3')}#{code_colors('6')} Clues: #{clue_markers('+')}#{clue_markers('+')}#{clue_markers('-')}
 
             Time to start the game.
+            
+        HEREDOC
+    end
+    
+    def make_choice
+        <<~HEREDOC
             Do you want to make a code or break a code.
-
+    
             Press '1' to be the code maker
             Press '2' to be the code breaker
+        HEREDOC
+    end
 
+    def play_again
+        <<~HEREDOC
+            Do you want to play again? Y for Yes. Anything else will quit the game.
+            HEREDOC
+        end
+        
+        def ask_user_for_code
+            <<~HEREDOC
+            Please give a valid code of 4 number/color combinations from 1 to 6.
+            Example: #{code_colors('3')}#{code_colors('2')}#{code_colors('5')}#{code_colors('6')}
         HEREDOC
     end
 end

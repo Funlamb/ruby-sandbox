@@ -14,9 +14,17 @@ class Main
         puts ""
         puts instructions
 
-        game_choice = game_selection
-        code_maker if game_choice == '1'
-        code_breaker if game_choice == '2'
+        # This loop asks the user if they want to play again.
+        play_game = 'y'
+        until play_game != 'y' do
+            puts make_choice
+            game_choice = game_selection
+            code_maker if game_choice == '1'
+            code_breaker if game_choice == '2'
+            puts play_again
+            # ask user if they want to play again
+            play_game = gets.chomp.downcase
+        end
     end
     
     def game_selection
