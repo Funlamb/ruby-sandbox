@@ -30,6 +30,12 @@ module Formating
         puts ''
     end
 
+    def display_human_first_move
+        puts "Please make your first guess."
+        print "Example: "
+        show_code("2354".chars)
+    end
+
     def display_human_feedback(guess, clues, turns)
         show_code(guess)
         show_clues(clues[0], clues[1])
@@ -63,6 +69,8 @@ module Formating
     end
 
     def display_computer_victory(guess, turns)
+        show_code(guess)
+        show_clues(4,0)
         print "The computer figured out your code of "
         show_code(guess)
         turns = 12 - turns

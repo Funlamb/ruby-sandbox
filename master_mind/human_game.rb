@@ -9,6 +9,7 @@ class HumanGame
     end
 
     def start
+        display_human_first_move
         11.downto(0) do |turns|
             guess = @board.get_valid_guess
             if @board.check_if_correct(guess)
