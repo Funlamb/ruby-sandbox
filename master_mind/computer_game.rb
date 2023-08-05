@@ -15,17 +15,16 @@ class ComputerGame
         @guesses = make_all_guesses
         computer_guess = 1122.to_s
         clue = @board.give_feedback(computer_guess)
-        display_computer_feedback(computer_guess.chars, clue, 11)
-        10.downto(1) do |turn| 
+        11.downto(1) do |turn| 
             prune_bad_guesses(clue, computer_guess)
             computer_guess = @guesses[rand(@guesses.length)]
+            clue = @board.give_feedback(computer_guess)
             if @board.check_if_correct(computer_guess)
                 display_computer_victory(computer_guess.chars, turn)
                 return true
             end
-            clue = @board.give_feedback(computer_guess)
-        display_computer_feedback(computer_guess.chars, clue, turn)
-
+            display_computer_feedback(computer_guess.chars, clue, turn)
+            sleep(1)
         end
     end
 
