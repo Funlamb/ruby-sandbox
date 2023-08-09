@@ -21,11 +21,3 @@ File.foreach("users.txt") do |line|
     puts line
     file_data.push(line)
 end
-
-# Writing to a file moves the cursor. To read from that file again you must go back to the top
-fd = File.open("cursor.txt", "w")
-fd.puts 'Hello World'
-fd.puts 'goodbye world'
-puts fd.gets
-puts fd.pos
-puts fd.eof?
