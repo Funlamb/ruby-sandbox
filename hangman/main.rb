@@ -1,23 +1,12 @@
 # Download the google words
 # Find words that are 5 to 12 letters long
-if (!File.exist?('google-10000-words-between-5-12.txt'))
+unless File.exist?('google-10000-words-between-5-12.txt')
     filtered_words = []
-    File.foreach('google-10000-words.txt', chomp: true) do |line|
-        if (line.length.between?(5,12))
-            filtered_words.push line
-        end
-    end
-    file = File.open('google-10000-words-between-5-12.txt', 'w')
-    filtered_words.each do |word|
-        file.write(word + "\n")
-    end
-    file.close
+    filtered_words = File.foreach('google-10000-words.txt', chomp: true).select {
+        _1.length.between?(5,12) }
+    
+    File.open('google-10000-words-between-5-12.txt', 'w') { _1.puts *filtered_words}
 end
-# file = File.open('google-10000-words.txt')
-# google_words = file.read
-# print google_words 
-# Save new lest to a file so we don't have to do that again
-# Check if that file is available and use it
 
 # load the words
 
