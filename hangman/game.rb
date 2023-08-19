@@ -12,19 +12,23 @@ class Game
     end
 
     def load_game()
-        # TODO Load Game
         # get a name of all the files
         files = []
         Find.find('.') do |path|
             files << path if path =~ /.*\.hm$/
         end
-        # show the files to the user
-        puts files
+        # show the trimmed file names to the user
+        puts files.map {_1.delete_suffix(".hm").delete_prefix("./")}
         puts "What file would you like to load?"
         file_to_load = gets.chomp
-        file = File.open("#{file_to_load}.hm")
-        load_yaml(file)
-        core_game
+        file_to_load = file_to_load.gsub("\.hm", "") # Remove .hm incase player added it
+        if (File.exist?("#{file_to_load}.hm"))
+            file = File.open("#{file_to_load}.hm")
+            load_yaml(file)
+            core_game
+        else 
+            puts "File does not exist!"
+        end
     end
 
     def load_yaml(string)
@@ -35,7 +39,6 @@ class Game
     end
 
     def save_game(word_to_guess, remaining_guesses, letters_guessed)
-        # TODO Save game
         puts "What do you want to name your save file?"
         save_file_name = gets.chomp
         save_file = YAML.dump ({
@@ -54,19 +57,10 @@ class Game
     end
     
     def start_game
-        # TODO Start Game
         @word_to_guess = get_random_word
         @remaining_guesses = 10
         @letters_guessed = []
         core_game
-    end
-
-    def continue_game
-        # TODO Continue Game
-        # look for files with .hm
-        # show users names
-        # check for matching name
-        # load file with correct name
     end
 
     def core_game
@@ -75,12 +69,15 @@ class Game
         while @remaining_guesses > 0 && still_playing
             puts "You have #{remaining_guesses} wrong guesses before you loose the game."
             puts "Your word to guess: " + word_with_blanks(letters_guessed, word_to_guess)
-            puts "What letter would you like to try? (or 'save' to save your game)"
+            puts "What letter would you like to try? ('save' to save your game, or 'exit' to exit without saving)"
             is_user_input_valid = false
             until is_user_input_valid
                 user_input = gets.chomp.downcase
                 if user_input == 'save'
                     save_game(word_to_guess, remaining_guesses, letters_guessed)
+                    is_user_input_valid = true
+                    still_playing = false
+                elsif user_input == 'exit'
                     is_user_input_valid = true
                     still_playing = false
                 elsif user_input.length == 1
