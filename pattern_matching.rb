@@ -74,3 +74,50 @@ result = case arr
     in [_, _, 3, 4] then :match
 end
 puts "Not caring about the first two items [1, 2, 3, 4] in [_, _, 3, 4] = #{result}"
+
+arr = [1, 2, 3]
+arr2 = [2, 2]
+def arry_check(array)
+    result = case array
+        in [a, b, *] unless a == b
+        return :good
+    else 
+        return :no_good
+    end
+end
+puts "Check if array [1, 2] are an array and have don't have the same numbers: " + arry_check(arr).to_s
+puts "Check if array [2, 2] are an array and have don't have the same numbers: " + arry_check(arr2).to_s
+
+hash = {a: 'apple', b: 'banana'}
+result = case hash
+    in {a: 'apple', b: 'banana'}
+    :good
+    in {a: 'apple', b: 'bat'}
+    :no_good
+end
+puts "Checking a hash {a: 'apple', b: 'banana'} " + result.to_s
+
+hash = [1, 2, "a", 3, 4, "b", "c", 5, 6, 7]
+result = case hash
+    in [*pre, String => x, String =>z, *post]
+    [pre, x, z, post]
+end
+print "Print the sepperated array: " + result[0].to_s + " " + result[1].to_s + " " + result[2].to_s + " " + result[3].to_s + "\n"
+
+data = [
+    {name: "John", age: 59, first_language: 'english', job_title: 'CEO'},
+    {name: "Moyra", age: 53, first_language: 'french', job_title: 'actress'},
+    {name: "David", age: 32, first_language: 'english', job_title: 'Owner'},
+    {name: "Alexis", age: 29, first_language: 'english', job_title: 'Public Relations'},
+    {name: "Patric", age: 34, first_language: 'english', job_title: 'Co-Owner'},
+]
+name = "Alexis"
+age = 29
+job_title = "Public Relations"
+result = case data
+    in [*, {name: ^name, age: ^age, first_language: first_language, job_title: ^job_title}, *]
+    first_language
+    else
+        first_language = nil
+end
+puts "The first language of #{name} is #{first_language}."
