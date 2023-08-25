@@ -61,6 +61,7 @@ my_age = lambda { |age| puts "I am #{age} years old" }
 my_name.call("Tim")
 my_age.call(42)
 
+# Procs are like lambdas
 my_proc = Proc.new {|name="Bob"| puts name}
 my_proc.call
 my_proc.call("Mike")
