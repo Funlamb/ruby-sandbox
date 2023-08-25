@@ -60,3 +60,7 @@ my_name = ->(name) { puts "hello #{name}" }
 my_age = lambda { |age| puts "I am #{age} years old" }
 my_name.call("Tim")
 my_age.call(42)
+
+my_proc = Proc.new {|name="Bob"| puts name}
+my_proc.call
+my_proc.call("Mike")
